@@ -1,10 +1,19 @@
-import React from "react";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './pages/Login';
+import Register from './pages/Register';
+// import Profile from './pages/Profile'; // placeholder for now
+import Home from './pages/Home'; // optional
 
 function App() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        {/* <Route path="/profile" element={<Profile />} /> */}
+      </Routes>
+    </Router>
   );
 }
 
