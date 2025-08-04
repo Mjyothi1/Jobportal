@@ -6,6 +6,7 @@ import connectDB from './config/db.js';
 //Routes
 import authRoutes from './routes/authRoutes.js';
 import profileRoutes from './routes/profileRoutes.js';
+import jobRoutes from './routes/jobRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -20,6 +21,7 @@ app.get('/', (req, res) => res.send('API running with ESM support'));
 // Use Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/profile', profileRoutes);
+app.use('/api/jobs', jobRoutes);
 
 // Connect DB and Start Server
 connectDB();
