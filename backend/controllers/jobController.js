@@ -1,4 +1,5 @@
 import Job from '../models/Job.js';
+import { calculateMatchScore } from "../services/aiService.js";
 
 // POST /api/jobs
 export const createJob = async (req, res) => {
@@ -63,5 +64,31 @@ export const getJobById = async (req, res) => {
     res.json(job);
   } catch (err) {
     res.status(500).json({ message: 'Error fetching job', error: err.message });
+  }
+};
+
+export const getAllJobsWithScore = async (req, res) => {
+  try {
+    const user = req.user;
+
+    if (!user || !user.bio) {
+      return res.status(400).json({ message: "User bio is required for scoring" });
+    }
+
+    const profileText = `${user.bio} ${user.skills?.join(" ") || ""}`;
+    const jobs = await Job.find().populate("postedBy", "name");
+
+    const jobsWithScores = await Promise.all(
+      jobs.map(async (job) => {
+        const jobDescription = job.description?.trim() || "";
+        const score = await calculateMatchScore(profileText, jobDescription);
+        return { ...job.toObject(), matchScore: score };
+      })
+    );
+
+    res.json(jobsWithScores);
+  } catch (err) {
+    console.error("AI score backend error:", err.message);
+    res.status(500).json({ message: "Failed to fetch jobs with match score", error: err.message });
   }
 };
