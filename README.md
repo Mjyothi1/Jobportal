@@ -79,13 +79,6 @@ GOOGLE_API_KEY=your-google-api-key
 
 ---
 
-## 📸 Screenshots
-
-* Home Page with dark theme
-* AI-powered Match % on Job Cards
-* Wallet Connect button
-* Secure Register/Login
-
 ---
 
 ## 🧠 AI Integration
@@ -107,7 +100,3 @@ Handled via server-side API using Google Generative AI SDK.
 * Only then job is posted to DB
 
 ---
-
-## ✅ Status
-
-All major features implemented and deployed. Ready for demo and resume case study. 🚀
