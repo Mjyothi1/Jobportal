@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:5000/api', // change to production URL if needed
+  baseURL: 'https://jobportal-bget.onrender.com/api', // 👈 your live backend
   headers: {
     'Content-Type': 'application/json',
   },
